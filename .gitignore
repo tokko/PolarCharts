@@ -1,0 +1,5 @@
+*.zip
+*.jpeg
+*.swp
+*Rhistory
+data/*
