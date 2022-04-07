@@ -6,6 +6,7 @@ def plot(x, y, graphName):
     fig = go.Figure(data=go.Barpolar(
         r = x, 
         theta = y,
+        marker_color=["#E4FF87" for _ in y],
         width=[5 for x in range(len(x))]
     ),
     )
