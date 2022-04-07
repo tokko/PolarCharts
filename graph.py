@@ -34,11 +34,13 @@ def getData(path):
     f.close
     return data
 
+def sanitize_data(data):
+    return list(filter(lambda a: a != 0, [abs(x) for x in data]))
+
 def plotDataFile(path, graphName):
     data = getData(path)
-    fd = [int(float(a)) for a in filter(lambda a: a != "", data.split("\n"))]
-    groups = itertools.groupby(fd, key=lambda a: a)
-    m = [(a, len(list(b))) for a, b in groups]
+    fd = sanitize_data([int(float(a)) for a in filter(lambda a: a != "", data.split("\n"))])
+    print(fd)
     plot([1 for x in range(len(fd))], fd, graphName)
 
 plotDataFile("data2/flow_kd_fiber.txt", "flow_kd_fiber")
