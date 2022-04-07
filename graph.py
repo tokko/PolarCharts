@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import plotly.graph_objects as go
 import itertools
+import sys
 
 def plot(x, y, graphName):
     fig = go.Figure(data=go.Barpolar(
@@ -26,7 +27,7 @@ def plot(x, y, graphName):
                 )
             )
    # fig.update_polars(dict(angularaxis=dict(rotation=90, direction='clockwise'), sector=[0, 360]))
-    fig.write_image("%s.jpeg"%graphName)
+    fig.write_image("graphs/%s.jpeg"%graphName)
 
 def getData(path):
     f = open(path, mode='r')
@@ -40,14 +41,8 @@ def sanitize_data(data):
 def plotDataFile(path, graphName):
     data = getData(path)
     fd = sanitize_data([int(float(a)) for a in filter(lambda a: a != "", data.split("\n"))])
-    print(fd)
     plot([1 for x in range(len(fd))], fd, graphName)
 
-plotDataFile("data2/flow_kd_fiber.txt", "flow_kd_fiber")
-plotDataFile("data2/flow_kd_nuclear.txt", "flow_kd_nuclear")
-plotDataFile("data2/flow_wt_fiber.txt", "flow_wt_fiber")
-plotDataFile("data2/flow_wt_nuclear.txt", "flow_wt_nuclear")
-plotDataFile("data2/static_kd_fiber.txt", "static_kd_fiber")
-plotDataFile("data2/static_kd_nuclear.txt", "static_kd_nuclear")
-plotDataFile("data2/static_wt_fiber.txt", "static_wt_fiber")
-plotDataFile("data2/static_wt_nuclear.txt", "static_wt_nuclear")
+for fileName in sys.argv[1:]:
+    name = fileName.split("/")[1].split(".")[0]
+    plotDataFile(fileName, name)
