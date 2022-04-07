@@ -30,10 +30,9 @@ def plot(x, y, graphName):
     fig.write_image("graphs/%s.jpeg"%graphName)
 
 def getData(path):
-    f = open(path, mode='r')
-    data = f.read()
-    f.close
-    return data
+    with open(path, mode='r') as f:
+        data = f.read()
+        return data
 
 def sanitize_data(data):
     return list(filter(lambda a: a != 0, [abs(x) for x in data]))
