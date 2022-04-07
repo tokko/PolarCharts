@@ -7,27 +7,25 @@ def plot(x, y, graphName):
     fig = go.Figure(data=go.Barpolar(
         r = x, 
         theta = y,
-        marker_color=["#E4FF87" for _ in y],
+        marker_color=["#C55" for _ in y],
         width=[5 for x in range(len(x))]
     ),
     )
     fig.update_layout(template=None, 
             polar=dict(
-                radialaxis = dict(
-                    showticklabels=False
-                    )
-                ), 
+                radialaxis = dict(range=[0,8.3],showticklabels=False)
+                ),
             angularaxis=dict(
                 range=[0,180],
                 showticklabels=False)
             )
     fig.update_layout(
             showlegend = False,
-            polar = dict(sector = [0,180]
-                )
+            polar = dict(sector = [0,180])
             )
    # fig.update_polars(dict(angularaxis=dict(rotation=90, direction='clockwise'), sector=[0, 360]))
-    fig.write_image("graphs/%s.jpeg"%graphName)
+    fig.write_image("graphs/%s.pdf"%graphName)
+    #fig.write_image("graphs/%s.jpeg"%graphName)
 
 def getData(path):
     with open(path, mode='r') as f:
