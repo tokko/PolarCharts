@@ -25,12 +25,12 @@ def plot(x, y, graphName):
             )
    # fig.update_polars(dict(angularaxis=dict(rotation=90, direction='clockwise'), sector=[0, 360]))
     fig.write_image("graphs/%s.pdf"%graphName)
-    #fig.write_image("graphs/%s.jpeg"%graphName)
+    fig.write_image("graphs/%s.jpeg"%graphName)
 
 def getData(path):
-    with open(path, mode='r') as f:
-        data = f.read()
-        return data
+    f = open(path, mode='r')
+    data = f.read()
+    return data
 
 def sanitize_data(data):
     return list(filter(lambda a: a != 0, [abs(x) for x in data]))
