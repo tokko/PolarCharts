@@ -1,4 +1,4 @@
-# YuanGraphs
+# PolarCharts
 
 Creates 0-180 polar bar charts.
 Uses plotly.
